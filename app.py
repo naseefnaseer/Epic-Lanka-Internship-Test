@@ -88,7 +88,7 @@ def delete_department(id):
 # Employee Class/ Model
 class Employee(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    emp_name = db.Column(db.String(50), unique = True)
+    emp_name = db.Column(db.String(50), nullable = False)
     emp_address = db.Column(db.String(200), nullable = False)
     designation = db.Column(db.String(50), nullable = False)
     dob = db.Column(db.String(8), nullable = False)
