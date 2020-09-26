@@ -60,12 +60,18 @@ def get_departments():
 @app.route("/department/<id>", methods = ['GET'])
 def get_department(id):
     department = Department.query.get(id)
+    if (department == None):
+        return jsonify({"Msg": "Department not found with id " + id})
+
     return dept_schema.jsonify(department)
 
 # Update Department
 @app.route('/department/update/<id>', methods=['PUT'])
 def update_dept(id):
     department = Department.query.get(id)
+    if (department == None):
+        return jsonify({"Msg": "Department not found with id " + id})
+
 
     dept_name = request.json['dept_name']
     dept_address = request.json['dept_address']
@@ -81,6 +87,9 @@ def update_dept(id):
 @app.route("/department/<id>", methods = ['DELETE'])
 def delete_department(id):
     department = Department.query.get(id)
+    if (department == None):
+        return jsonify({"Msg": "Department not found with id " + id})
+
     db.session.delete(department)
     db.session.commit()
     return dept_schema.jsonify(department)
@@ -125,13 +134,9 @@ def add_emp():
     email = request.json['email']
     dept_id = request.json['dept_id']
 
-    print("**************************************")
     dep = Department.query.get(dept_id)
-    result = dept_schema.dump(dep)
-    print(result)
     if (dep == None):
         return jsonify({"Msg": "Invalid Department ID"})
-    print("**************************************")
 
 
     new_emp = Employee(emp_name, emp_address, designation, dob, telephone, email, dept_id)
@@ -146,10 +151,6 @@ def add_emp():
 def get_employees():
     all_employees = Employee.query.all()
     result = emps_schema.dump(all_employees)
-    print("________________________")
-    print(result)
-    print("________________________")
-
     return jsonify(result)
 
 # Get employee using id
@@ -169,12 +170,6 @@ def update_emp(id):
     if (employee == None):
         return jsonify({"Msg": "Employee not found with id " + id})
     
-    print("----------------------------------------------------------")
-
-    if (not request.json['emp_name']):
-        print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
-
-    print("----------------------------------------------------------")
 
     emp_name = request.json['emp_name']
     emp_address = request.json['emp_address']
@@ -200,6 +195,9 @@ def update_emp(id):
 @app.route("/employee/<id>", methods = ['DELETE'])
 def delete_employee(id):
     employee = Employee.query.get(id)
+    if (employee == None):
+        return jsonify({"Msg": "Employee not found with id " + id})
+
     db.session.delete(employee)
     db.session.commit()
     return emp_schema.jsonify(employee)
