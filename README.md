@@ -1,5 +1,5 @@
 # Epic-Lanka-Internship-Test
-Python Flask restAPI with basic CRUD operations to manages details of Department and Employees.
+Python Flask restAPI with basic CRUD operations to manages details of Department and Employees using MySQL Database
 
 ## Packages used
 * flask 
