@@ -1,5 +1,5 @@
 # Epic-Lanka-Internship-Test
-Flask restAPI with basic CRUD operations
+Flask restAPI with basic CRUD operations to manages details of Department and Employees.
 
 ## Packages used
 * flask 
